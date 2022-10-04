@@ -72,7 +72,10 @@ trait FlowContextTrait
         if (!defined('BEHAT_ERROR_REPORTING')) {
             define('BEHAT_ERROR_REPORTING', E_ALL);
         }
-        $bootstrap = new Bootstrap('Testing/Behat');
+
+        $flowContext = getenv('FLOW_CONTEXT_BEHAT') ?: 'Testing/Behat';
+
+        $bootstrap = new Bootstrap($flowContext);
         Scripts::initializeClassLoader($bootstrap);
         Scripts::initializeSignalSlot($bootstrap);
         Scripts::initializePackageManagement($bootstrap);
